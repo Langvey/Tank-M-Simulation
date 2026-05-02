@@ -1331,6 +1331,57 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 	]]></Action>
 				</Event>
 			</Events>
+			<Schedules>
+				<Schedule>
+					<Id>1777696686950</Id>
+					<Name><![CDATA[arrivalSchedule]]></Name>
+					<X>250</X><Y>450</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<ValueType>double_</ValueType>
+					<UnitType><![CDATA[RATE]]></UnitType>
+					<UnitOfValue Class="RateUnits"><![CDATA[PER_HOUR]]></UnitOfValue>
+					<DefaultValue>0.0</DefaultValue>
+					<RepresentationMode>intervals</RepresentationMode>
+					<RepresentationType>calendar</RepresentationType>
+					<FirstDayOfWeek>sunday</FirstDayOfWeek>
+					<TimeUnitsInterval>hours</TimeUnitsInterval>
+					<RepeatTime>86400000</RepeatTime>
+					<RepeatTimeInterval>days</RepeatTimeInterval>
+					<IsSnapTo>false</IsSnapTo>
+					<SnapTo>1777696793184</SnapTo>
+					<SnapToTimeUnits>minutes</SnapToTimeUnits>
+					<AllDayExceptionMode>false</AllDayExceptionMode>
+					<LoadFromDatabase><![CDATA[false]]></LoadFromDatabase>
+					<IntervalsQuery>
+						<Id>1777696686948</Id>
+						<TableReference>
+						</TableReference>
+							<StartColumnReference>
+							</StartColumnReference>
+							<EndColumnReference>
+							</EndColumnReference>
+							<ValueColumnReference>
+							</ValueColumnReference>
+					</IntervalsQuery>
+					<Intervals>
+						<Interval>
+							<Start>28800000</Start>
+							<End>43200000</End>
+							<Value>0.0875</Value>
+						</Interval>
+						<Interval>
+							<Start>43200000</Start>
+							<End>72000000</End>
+							<Value>0.01875</Value>
+						</Interval>
+					</Intervals>
+					<Exceptions>
+					</Exceptions>
+				</Schedule>
+			</Schedules>
 			<AgentLinks>
 				<AgentLink>
 					<Id>1773211376895</Id>
@@ -2367,6 +2418,9 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 					<Parameters>
 						<Parameter>
 							<Name><![CDATA[arrivalType]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[self.RATE_SCHEDULE]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[rate]]></Name>
@@ -2386,6 +2440,9 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[rateSchedule]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[arrivalSchedule]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[modifyRate]]></Name>
@@ -2402,7 +2459,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 						<Parameter>
 							<Name><![CDATA[databaseTable]]></Name>
 							<Value Class="DatabaseContextTableCodeValue">
-								<Id>1777538780407</Id>
+								<Id>1777714558606</Id>
 								<TableReference>
 									<PackageName><![CDATA[tank_m]]></PackageName>
 									<ClassName><![CDATA[лист3]]></ClassName>
@@ -2475,7 +2532,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 							<Value Class="EntityCodeValue">
 								<IsAgentEntity>true</IsAgentEntity>
 								<EntityEmbeddedObject>
-									<Id>1777537101199</Id>
+									<Id>1777714558614</Id>
 									<ActiveObjectClass>
 										<PackageName><![CDATA[tank_m]]></PackageName>
 										<ClassName><![CDATA[RepairOrder]]></ClassName>
@@ -2512,7 +2569,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 									</LocationNameCode>
 									<InitializationType>LOAD_FROM_DATABASE</InitializationType>
 									<InitializationDatabaseTableQuery>
-										<Id>1777537101198</Id>
+										<Id>1777714558613</Id>
 										<TableReference>
 										</TableReference>
 									</InitializationDatabaseTableQuery>
@@ -2618,6 +2675,9 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[maximumCapacity]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[true]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[entityLocation]]></Name>
@@ -2929,6 +2989,9 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[maximumCapacity]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[true]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[entityLocation]]></Name>
@@ -5125,7 +5188,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 							<Value Class="EntityCodeValue">
 								<IsAgentEntity>true</IsAgentEntity>
 								<EntityEmbeddedObject>
-									<Id>1777537101209</Id>
+									<Id>1777714558624</Id>
 									<ActiveObjectClass>
 										<PackageName><![CDATA[tank_m]]></PackageName>
 										<ClassName><![CDATA[RepairOrder]]></ClassName>
@@ -5162,7 +5225,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 									</LocationNameCode>
 									<InitializationType>LOAD_FROM_DATABASE</InitializationType>
 									<InitializationDatabaseTableQuery>
-										<Id>1777537101208</Id>
+										<Id>1777714558623</Id>
 										<TableReference>
 										</TableReference>
 									</InitializationDatabaseTableQuery>
@@ -5935,7 +5998,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 						<Parameter>
 							<Name><![CDATA[onEnter]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[finance.onRepairFinished(agent);]]></Code>
+								<Code><![CDATA[finance.onRepairFinished(agent, time());]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -6875,6 +6938,598 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 					</Font>
 					<Alignment>CENTER</Alignment>
 				</Text>
+    			<TimePlot>
+					<Id>1777697220125</Id>
+					<Name><![CDATA[plot]]></Name>
+					<X>200</X><Y>1290</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<AutoUpdate>true</AutoUpdate>
+					<RecurrenceProperties>
+						<Id>1777697220123</Id>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1777708800000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code><![CDATA[0]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+						</RecurrenceCode>
+					</RecurrenceProperties>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Width>370</Width>
+					<Height>300</Height>
+					<BackgroundColor/>
+					<BorderColor/>
+					<ChartArea>
+						<XOffset>50</XOffset>
+						<YOffset>30</YOffset>
+						<Width>290</Width>
+						<Height>210</Height>
+						<BackgroundColor>-1</BackgroundColor>
+						<BorderColor>-16777216</BorderColor>
+						<GridColor>-12566464</GridColor>
+					</ChartArea>
+					<Legend>
+						<Place>NORTH</Place>
+						<TextColor>-16777216</TextColor>
+						<Size>30</Size>
+					</Legend>
+					<Labels>
+						<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+						<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+						<TextColor>-12566464</TextColor>
+					</Labels>
+					<ShowLegend>true</ShowLegend>
+					<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>		
+					<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
+					<VerScaleFromExpression><![CDATA[0]]></VerScaleFromExpression>
+					<VerScaleToExpression><![CDATA[1]]></VerScaleToExpression>
+					<VerScaleType>AUTO</VerScaleType>
+					<DrawLine>true</DrawLine>
+					<Interpolation>LINEAR</Interpolation>
+					<DatasetExpression>  
+						<Title><![CDATA[Машин в очереди]]></Title>
+					<Id>1777697220896</Id>
+					<Expression><![CDATA[my_dataset]]></Expression>
+					<Color>-32944</Color>
+					<Expression2><![CDATA[queueBuffer.size()]]></Expression2>
+					<Expression2Flag>true</Expression2Flag>
+						<PointStyle>NONE</PointStyle>
+						<LineWidth>1.0</LineWidth>
+					</DatasetExpression>
+					<SamplesToKeep>100</SamplesToKeep>
+					<TimeWindowExpression><![CDATA[100]]></TimeWindowExpression>
+					<FillAreaUnderLine>false</FillAreaUnderLine>
+					<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
+    			</TimePlot>
+    			<BarChart>
+					<Id>1777697317773</Id>
+					<Name><![CDATA[chart]]></Name>
+					<X>740</X><Y>1280</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<AutoUpdate>true</AutoUpdate>
+					<RecurrenceProperties>
+						<Id>1777697317771</Id>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1777708800000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code><![CDATA[0]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+						</RecurrenceCode>
+					</RecurrenceProperties>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Width>370</Width>
+					<Height>300</Height>
+					<BackgroundColor/>
+					<BorderColor/>
+					<ChartArea>
+						<XOffset>50</XOffset>
+						<YOffset>30</YOffset>
+						<Width>290</Width>
+						<Height>210</Height>
+						<BackgroundColor>-1</BackgroundColor>
+						<BorderColor>-16777216</BorderColor>
+						<GridColor>-12566464</GridColor>
+					</ChartArea>
+					<Legend>
+						<Place>SOUTH</Place>
+						<TextColor>-16777216</TextColor>
+						<Size>30</Size>
+					</Legend>
+					<Labels>
+						<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+						<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+						<TextColor>-12566464</TextColor>
+					</Labels>
+					<ShowLegend>true</ShowLegend>
+					<DataItem>
+					<Id>1777697318987</Id>
+					<Expression><![CDATA[masterPool.utilization()]]></Expression>
+					<Color>-9728477</Color>
+						<Title><![CDATA[Мастера (Диагностика)]]></Title>
+					</DataItem>
+					<DataItem>
+					<Id>1777697332035</Id>
+					<Expression><![CDATA[welderPool.utilization()]]></Expression>
+					<Color>-16728065</Color>
+						<Title><![CDATA[Сварщики]]></Title>
+					</DataItem>
+					<DataItem>
+					<Id>1777697333225</Id>
+					<Expression><![CDATA[mechanicPool.utilization()]]></Expression>
+					<Color>-4565549</Color>
+						<Title><![CDATA[Слесари]]></Title>
+					</DataItem>
+					<DataItem>
+					<Id>1777714586887</Id>
+					<Expression><![CDATA[washerPool.utilization()]]></Expression>
+					<Color>-2354116</Color>
+						<Title><![CDATA[Мойщики]]></Title>
+					</DataItem>
+					<DataItem>
+					<Id>1777714864499</Id>
+					<Expression><![CDATA[testerPool.utilization()]]></Expression>
+					<Color>-10496</Color>
+						<Title><![CDATA[Контролеры ОТК]]></Title>
+					</DataItem>
+					<ScaleFromExpression><![CDATA[0]]></ScaleFromExpression>
+					<ScaleToExpression><![CDATA[1]]></ScaleToExpression>
+					<ScaleType>FIXED</ScaleType>
+					<Bars>
+						<Direction>UP</Direction>
+						<RelativeWidth>0.8</RelativeWidth>
+					</Bars>
+    			</BarChart>
+    			<BarChart>
+					<Id>1777698900819</Id>
+					<Name><![CDATA[chart1]]></Name>
+					<X>1220</X><Y>1260</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<AutoUpdate>true</AutoUpdate>
+					<RecurrenceProperties>
+						<Id>1777698900817</Id>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1777708800000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code><![CDATA[0]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+						</RecurrenceCode>
+					</RecurrenceProperties>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Width>340</Width>
+					<Height>310</Height>
+					<BackgroundColor/>
+					<BorderColor/>
+					<ChartArea>
+						<XOffset>50</XOffset>
+						<YOffset>30</YOffset>
+						<Width>260</Width>
+						<Height>220</Height>
+						<BackgroundColor>-1</BackgroundColor>
+						<BorderColor>-16777216</BorderColor>
+						<GridColor>-12566464</GridColor>
+					</ChartArea>
+					<Legend>
+						<Place>SOUTH</Place>
+						<TextColor>-16777216</TextColor>
+						<Size>30</Size>
+					</Legend>
+					<Labels>
+						<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+						<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+						<TextColor>-12566464</TextColor>
+					</Labels>
+					<ShowLegend>true</ShowLegend>
+					<DataItem>
+					<Id>1777698902035</Id>
+					<Expression><![CDATA[delayDiagnostic.size()]]></Expression>
+					<Color>-4565549</Color>
+						<Title><![CDATA[Пост диагностики]]></Title>
+					</DataItem>
+					<DataItem>
+					<Id>1777698936968</Id>
+					<Expression><![CDATA[delayWash.size()]]></Expression>
+					<Color>-2354116</Color>
+						<Title><![CDATA[Мойка]]></Title>
+					</DataItem>
+					<DataItem>
+					<Id>1777699238622</Id>
+					<Expression><![CDATA[delayWeld.size()]]></Expression>
+					<Color>-10496</Color>
+						<Title><![CDATA[Сварочный пост]]></Title>
+					</DataItem>
+					<DataItem>
+					<Id>1777699279356</Id>
+					<Expression><![CDATA[delayMechanic.size()]]></Expression>
+					<Color>-6632142</Color>
+						<Title><![CDATA[Слесарный пост]]></Title>
+					</DataItem>
+					<DataItem>
+					<Id>1777699295549</Id>
+					<Expression><![CDATA[delayTesting.size()]]></Expression>
+					<Color>-14774017</Color>
+						<Title><![CDATA[Зона тестирования]]></Title>
+					</DataItem>
+					<ScaleFromExpression><![CDATA[0]]></ScaleFromExpression>
+					<ScaleToExpression><![CDATA[1]]></ScaleToExpression>
+					<ScaleType>AUTO</ScaleType>
+					<Bars>
+						<Direction>UP</Direction>
+						<RelativeWidth>0.8</RelativeWidth>
+					</Bars>
+    			</BarChart>
+    			<TimePlot>
+					<Id>1777699321896</Id>
+					<Name><![CDATA[plot1]]></Name>
+					<X>1740</X><Y>1280</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<AutoUpdate>true</AutoUpdate>
+					<RecurrenceProperties>
+						<Id>1777699321894</Id>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1777708800000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code><![CDATA[0]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+						</RecurrenceCode>
+					</RecurrenceProperties>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Width>340</Width>
+					<Height>290</Height>
+					<BackgroundColor/>
+					<BorderColor/>
+					<ChartArea>
+						<XOffset>50</XOffset>
+						<YOffset>30</YOffset>
+						<Width>260</Width>
+						<Height>200</Height>
+						<BackgroundColor>-1</BackgroundColor>
+						<BorderColor>-16777216</BorderColor>
+						<GridColor>-12566464</GridColor>
+					</ChartArea>
+					<Legend>
+						<Place>NORTH</Place>
+						<TextColor>-16777216</TextColor>
+						<Size>30</Size>
+					</Legend>
+					<Labels>
+						<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+						<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+						<TextColor>-12566464</TextColor>
+					</Labels>
+					<ShowLegend>true</ShowLegend>
+					<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>		
+					<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
+					<VerScaleFromExpression><![CDATA[0]]></VerScaleFromExpression>
+					<VerScaleToExpression><![CDATA[1]]></VerScaleToExpression>
+					<VerScaleType>AUTO</VerScaleType>
+					<DrawLine>true</DrawLine>
+					<Interpolation>LINEAR</Interpolation>
+					<DatasetExpression>  
+						<Title><![CDATA[Готовые цистерны]]></Title>
+					<Id>1777699322857</Id>
+					<Expression><![CDATA[my_dataset]]></Expression>
+					<Color>-16728065</Color>
+					<Expression2><![CDATA[sink.count()]]></Expression2>
+					<Expression2Flag>true</Expression2Flag>
+						<PointStyle>NONE</PointStyle>
+						<LineWidth>1.0</LineWidth>
+					</DatasetExpression>
+					<SamplesToKeep>100</SamplesToKeep>
+					<TimeWindowExpression><![CDATA[100]]></TimeWindowExpression>
+					<FillAreaUnderLine>false</FillAreaUnderLine>
+					<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
+    			</TimePlot>
+				<Text>
+					<Id>1777700139080</Id>
+					<Name><![CDATA[text2]]></Name>
+					<X>200</X><Y>1540</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>270.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Количество цистерн (шт.)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1777700234919</Id>
+					<Name><![CDATA[text3]]></Name>
+					<X>380</X><Y>1590</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Модельное время (дни)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>CENTER</Alignment>
+				</Text>
+				<Text>
+					<Id>1777700405830</Id>
+					<Name><![CDATA[text4]]></Name>
+					<X>740</X><Y>1530</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>270.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Коэффициент загрузки (доли ед.)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1777700436186</Id>
+					<Name><![CDATA[text5]]></Name>
+					<X>800</X><Y>1530</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Категории рабочих]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1777700454177</Id>
+					<Name><![CDATA[text6]]></Name>
+					<X>1220</X><Y>1460</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>270.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Занятость поста (шт.)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1777700476914</Id>
+					<Name><![CDATA[text7]]></Name>
+					<X>1280</X><Y>1520</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Этапы ремонта]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1777700497334</Id>
+					<Name><![CDATA[text8]]></Name>
+					<X>1740</X><Y>1500</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>270.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Накопительный итог (шт.)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1777700517830</Id>
+					<Name><![CDATA[text9]]></Name>
+					<X>1830</X><Y>1565</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Модельное время (дни)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+    			<TimePlot>
+					<Id>1777701049059</Id>
+					<Name><![CDATA[plot2]]></Name>
+					<X>2330</X><Y>1300</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<AutoUpdate>true</AutoUpdate>
+					<RecurrenceProperties>
+						<Id>1777701049057</Id>
+						<OccurrenceAtTime>true</OccurrenceAtTime>
+						<OccurrenceDate>1777708800000</OccurrenceDate>
+						<OccurrenceTime Class="CodeUnitValue">
+							<Code><![CDATA[0]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+						</OccurrenceTime>
+						<RecurrenceCode Class="CodeUnitValue">
+							<Code><![CDATA[1]]></Code>
+							<Unit Class="TimeUnits"><![CDATA[DAY]]></Unit>
+						</RecurrenceCode>
+					</RecurrenceProperties>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Width>430</Width>
+					<Height>280</Height>
+					<BackgroundColor/>
+					<BorderColor/>
+					<ChartArea>
+						<XOffset>50</XOffset>
+						<YOffset>30</YOffset>
+						<Width>350</Width>
+						<Height>190</Height>
+						<BackgroundColor>-1</BackgroundColor>
+						<BorderColor>-16777216</BorderColor>
+						<GridColor>-12566464</GridColor>
+					</ChartArea>
+					<Legend>
+						<Place>NORTH</Place>
+						<TextColor>-16777216</TextColor>
+						<Size>30</Size>
+					</Legend>
+					<Labels>
+						<HorLabelsPosition>DEFAULT</HorLabelsPosition>
+						<VerLabelsPosition>DEFAULT</VerLabelsPosition>
+						<TextColor>-12566464</TextColor>
+					</Labels>
+					<ShowLegend>true</ShowLegend>
+					<TimeWindowsMovementType>MOVEMENT_WITH_TIME</TimeWindowsMovementType>		
+					<TimeWindowUnits>MODEL_TIME_UNIT</TimeWindowUnits>
+					<VerScaleFromExpression><![CDATA[0]]></VerScaleFromExpression>
+					<VerScaleToExpression><![CDATA[1]]></VerScaleToExpression>
+					<VerScaleType>AUTO</VerScaleType>
+					<DrawLine>true</DrawLine>
+					<Interpolation>LINEAR</Interpolation>
+					<DatasetExpression>  
+						<Title><![CDATA[Чистая прибыль (руб.)]]></Title>
+					<Id>1777701049812</Id>
+					<Expression><![CDATA[my_dataset]]></Expression>
+					<Color>-3137392</Color>
+					<Expression2><![CDATA[finance.totalNPV]]></Expression2>
+					<Expression2Flag>true</Expression2Flag>
+						<PointStyle>NONE</PointStyle>
+						<LineWidth>1.0</LineWidth>
+					</DatasetExpression>
+					<SamplesToKeep>100</SamplesToKeep>
+					<TimeWindowExpression><![CDATA[100]]></TimeWindowExpression>
+					<FillAreaUnderLine>false</FillAreaUnderLine>
+					<LabelFormat>MODEL_TIME_UNITS</LabelFormat>
+    			</TimePlot>
+				<Text>
+					<Id>1777701155612</Id>
+					<Name><![CDATA[text10]]></Name>
+					<X>2290</X><Y>1490</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>270.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Сумма (руб.)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
+				<Text>
+					<Id>1777701177071</Id>
+					<Name><![CDATA[text11]]></Name>
+					<X>2440</X><Y>1580</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<Rotation>0.0</Rotation>
+					<Color>-16777216</Color>
+					<Text><![CDATA[Модельное время (дни)]]></Text>
+					<Font>
+						<Name>SansSerif</Name>
+						<Size>16</Size>
+						<Style>0</Style>
+					</Font>
+					<Alignment>LEFT</Alignment>
+				</Text>
 			</Presentation>
 
 				</Level>
@@ -7215,30 +7870,32 @@ public interface IShiftDependent {
 		<JavaClass>
 			<Id>1777272967186</Id>
 			<Name><![CDATA[ShiftManager]]></Name>
-			<Text><![CDATA[public class ShiftManager {
-    public enum ShiftType { dayShift, eveningShift, nightShift }
-    public ShiftType currentShift = ShiftType.dayShift;
+			<Text><![CDATA[import java.io.Serializable;
+
+public class ShiftManager implements Serializable {
     
-    private Main main;
+    // коэффициенты для каждой смены
+    public enum ShiftType { 
+        dayShift(1.00, 1.0), 
+        eveningShift(0.90, 1.2), 
+        nightShift(0.85, 1.4);
 
-    public ShiftManager(Main mainObject) {
-        this.main = mainObject;
-    }
+        public final double productivityAlpha; 
+        public final double wageMultiplier;    
 
-    public double getAlpha() {
-    	// Коэффициент потери времени на регламентированную пересменку (15 минут из 8 часов)
-        double handoverPenalty = 7.75 / 8.0; 
-        
-        switch(currentShift) {
-            case dayShift:     return 1.00 * handoverPenalty;
-            case eveningShift: return 0.90 * handoverPenalty;
-            case nightShift:   return 0.85 * handoverPenalty;
-            default:           return 1.00 * handoverPenalty;
+        ShiftType(double alpha, double wageMult) {
+            this.productivityAlpha = alpha;
+            this.wageMultiplier = wageMult;
         }
     }
+    
+    public ShiftType currentShift = ShiftType.dayShift;
 
-    public double getCrossoverTime() {
-        return main.triangular(0.17, 0.25, 0.33); 
+    public ShiftManager(Main main) { }
+
+    public double getAlpha() {
+        double handoverPenalty = 7.75 / 8.0; 
+        return currentShift.productivityAlpha * handoverPenalty;
     }
 }]]></Text>
 		</JavaClass>
@@ -7246,28 +7903,47 @@ public interface IShiftDependent {
 		<JavaClass>
 			<Id>1777273129188</Id>
 			<Name><![CDATA[FinancialController]]></Name>
-			<Text><![CDATA[public class FinancialController {
-    public double totalNPV = 0;
-    public double revenueCount = 0;
-    
-    // Параметры из Танк-М 
-    private final double PRICE_PER_REPAIR = 85000.0;
-    private final double VAR_COSTS = 40000.0;
-    private final double FIXED_COSTS_MONTH = 400000.0;
+			<Text><![CDATA[import java.io.Serializable;
 
-    public void onRepairFinished(RepairOrder order) {
-        revenueCount += PRICE_PER_REPAIR;
+public class FinancialController implements Serializable {
+    public double totalNPV = 0; // чистая прибыль
+    public double revenueCount = 0; // выручка
+    
+    private final double PRICE_PER_REPAIR = 85000.0;
+    private final double VAR_COSTS = 35000.0; 
+
+
+    public void onRepairFinished(RepairOrder order, double time) {
+        this.revenueCount += PRICE_PER_REPAIR;
         double profit = PRICE_PER_REPAIR - VAR_COSTS;
-        totalNPV += profit;
-        // Здесь будет логика дисконтирования по ставке 15% (наверное)
+        this.totalNPV += profit;
     }
     
-    // Расчет ФОТ с учетом доплат +20% и +40% 
+    public double calculateMargin() {
+        if (revenueCount == 0) return 0;
+        return (totalNPV / revenueCount) * 100;
+    }
+
+
     public double calculateLaborCost(int staffCount, ShiftManager.ShiftType shift) {
-        double baseRate = 500.0; // Примерная ставка
-        if (shift == ShiftManager.ShiftType.eveningShift) return baseRate * 1.2;
-        if (shift == ShiftManager.ShiftType.nightShift) return baseRate * 1.4;
-        return baseRate;
+        double baseRate = 350.0; // Ставка за час
+        return baseRate * shift.wageMultiplier * staffCount;
+    }
+}]]></Text>
+		</JavaClass>
+		<!--   =========   Java Class   ========  -->
+		<JavaClass>
+			<Id>1777703139863</Id>
+			<Name><![CDATA[DefectType]]></Name>
+			<Text><![CDATA[public enum DefectType {
+    NONE(0.0),                  // Идеальный ремонт
+    MINOR_PAINT_SCRATCH(5000.0),// Мелкая царапина (штраф 5000)
+    WELDING_CRACK(15000.0);     // Трещина в шве (штраф 15000)
+
+    public final double reworkCost; // Стоимость переделки
+
+    DefectType(double cost) {
+        this.reworkCost = cost;
     }
 }]]></Text>
 		</JavaClass>
