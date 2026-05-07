@@ -18,6 +18,7 @@
 		<ActiveObjectClass>
 			<Id>1773211376894</Id>
 			<Name><![CDATA[Main]]></Name>
+			<StartupCode><![CDATA[viewLogic1.navigateTo();]]></StartupCode>
 			<Generic>false</Generic>
 			<GenericParameter>
 				<Id>1773211376899</Id>
@@ -138,6 +139,30 @@
 							<Code><![CDATA[new FinancialController()]]></Code>
 						</InitialValue>
 					</Properties>
+				</Variable>
+				<Variable Class="Parameter">
+					<Id>1778113909246</Id>
+					<Name><![CDATA[isThreeShiftsMode]]></Name>
+					<X>630</X><Y>90</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" ModificatorType="STATIC">
+						<Type><![CDATA[boolean]]></Type>
+						<UnitType><![CDATA[NONE]]></UnitType>
+						<SdArray>false</SdArray>
+						<DefaultValue Class="CodeValue">
+							<Code><![CDATA[false]]></Code>
+						</DefaultValue>
+						<ParameterEditor>
+							<Id>1778113909244</Id>
+							<EditorContolType>CHECK_BOX</EditorContolType>
+							<MinSliderValue><![CDATA[0]]></MinSliderValue>
+							<MaxSliderValue><![CDATA[100]]></MaxSliderValue>
+							<DelimeterType>NO_DELIMETER</DelimeterType>
+						</ParameterEditor>
+					</Properties>                 
 				</Variable>
 			</Variables>
 			<Connectors>
@@ -1285,7 +1310,7 @@
 				<Event>
 					<Id>1777282482026</Id>
 					<Name><![CDATA[shiftEvent]]></Name>
-					<X>70</X><Y>90</Y>
+					<X>80</X><Y>100</Y>
 					<Label><X>10</X><Y>-5</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1321,21 +1346,30 @@ if (shiftManager.currentShift == ShiftManager.ShiftType.dayShift) {
     shiftManager.currentShift = ShiftManager.ShiftType.dayShift;
 }
 
+// Определяем количество персонала 
+int currentStaff = 7; 
 
-// Допустим, у нас 7 слесарей. Считаем их зарплату через финансовый контроллер
-double laborCost = finance.calculateLaborCost(7, shiftManager.currentShift);
+if (shiftManager.currentShift == ShiftManager.ShiftType.nightShift && isThreeShiftsMode == false) {
+    currentStaff = 0; // Цех пустой
+}
+
+
+mechanicPool.set_capacity(currentStaff);
+welderPool.set_capacity(currentStaff);
+
+// 4. Финансы: считаем зарплату только тем, кто реально вышел
+double laborCost = finance.calculateLaborCost(currentStaff, shiftManager.currentShift);
 finance.totalNPV -= laborCost;
 
-traceln("Смена изменилась на: " + shiftManager.currentShift + ". Альфа теперь: " + shiftManager.getAlpha());
-
-	]]></Action>
+// 5. Вывод в консоль для проверки (поможет при отладке)
+traceln("Смена: " + shiftManager.currentShift + " | Вместимость пула: " + currentStaff + " | ЗП за смену: " + laborCost);]]></Action>
 				</Event>
 			</Events>
 			<Schedules>
 				<Schedule>
 					<Id>1777696686950</Id>
 					<Name><![CDATA[arrivalSchedule]]></Name>
-					<X>250</X><Y>450</Y>
+					<X>70</X><Y>260</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2452,6 +2486,9 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[arrivalSchedule]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[arrivalSchedule]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[setAgentParametersFromDB]]></Name>
@@ -2459,7 +2496,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 						<Parameter>
 							<Name><![CDATA[databaseTable]]></Name>
 							<Value Class="DatabaseContextTableCodeValue">
-								<Id>1777714558606</Id>
+								<Id>1778166132010</Id>
 								<TableReference>
 									<PackageName><![CDATA[tank_m]]></PackageName>
 									<ClassName><![CDATA[лист3]]></ClassName>
@@ -2532,7 +2569,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 							<Value Class="EntityCodeValue">
 								<IsAgentEntity>true</IsAgentEntity>
 								<EntityEmbeddedObject>
-									<Id>1777714558614</Id>
+									<Id>1778166132018</Id>
 									<ActiveObjectClass>
 										<PackageName><![CDATA[tank_m]]></PackageName>
 										<ClassName><![CDATA[RepairOrder]]></ClassName>
@@ -2569,7 +2606,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 									</LocationNameCode>
 									<InitializationType>LOAD_FROM_DATABASE</InitializationType>
 									<InitializationDatabaseTableQuery>
-										<Id>1777714558613</Id>
+										<Id>1778166132017</Id>
 										<TableReference>
 										</TableReference>
 									</InitializationDatabaseTableQuery>
@@ -5188,7 +5225,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 							<Value Class="EntityCodeValue">
 								<IsAgentEntity>true</IsAgentEntity>
 								<EntityEmbeddedObject>
-									<Id>1777714558624</Id>
+									<Id>1778166132028</Id>
 									<ActiveObjectClass>
 										<PackageName><![CDATA[tank_m]]></PackageName>
 										<ClassName><![CDATA[RepairOrder]]></ClassName>
@@ -5225,7 +5262,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 									</LocationNameCode>
 									<InitializationType>LOAD_FROM_DATABASE</InitializationType>
 									<InitializationDatabaseTableQuery>
-										<Id>1777714558623</Id>
+										<Id>1778166132027</Id>
 										<TableReference>
 										</TableReference>
 									</InitializationDatabaseTableQuery>
@@ -6893,6 +6930,28 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 					<LevelVisibility>DIM_NON_CURRENT</LevelVisibility>
 
 			<Presentation>
+				<Rectangle>
+					<Id>1778111263724</Id>
+					<Name><![CDATA[rectangle]]></Name>
+					<X>60</X><Y>1200</Y>
+					<Label><X>10</X><Y>10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<EmbeddedIcon>false</EmbeddedIcon>
+					<Z>0</Z>
+					<ZHeight>10</ZHeight>
+					<LineWidth>1</LineWidth>
+					<LineColor>-16777216</LineColor>
+					<LineMaterial>null</LineMaterial>
+					<LineStyle>SOLID</LineStyle>
+					<Width>1920</Width>
+					<Height>1080</Height>
+					<Rotation>0.0</Rotation>
+					<FillColor>-2894893</FillColor>
+					<FillMaterial>null</FillMaterial>
+				</Rectangle>
 				<Text>
 					<Id>1777282696748</Id>
 					<Name><![CDATA[text]]></Name>
@@ -7183,7 +7242,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
     			<TimePlot>
 					<Id>1777699321896</Id>
 					<Name><![CDATA[plot1]]></Name>
-					<X>1740</X><Y>1280</Y>
+					<X>1360</X><Y>1680</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7379,7 +7438,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 				<Text>
 					<Id>1777700497334</Id>
 					<Name><![CDATA[text8]]></Name>
-					<X>1740</X><Y>1500</Y>
+					<X>1360</X><Y>1900</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7400,7 +7459,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 				<Text>
 					<Id>1777700517830</Id>
 					<Name><![CDATA[text9]]></Name>
-					<X>1830</X><Y>1565</Y>
+					<X>1450</X><Y>1965</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7421,7 +7480,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
     			<TimePlot>
 					<Id>1777701049059</Id>
 					<Name><![CDATA[plot2]]></Name>
-					<X>2330</X><Y>1300</Y>
+					<X>730</X><Y>1680</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7491,7 +7550,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 				<Text>
 					<Id>1777701155612</Id>
 					<Name><![CDATA[text10]]></Name>
-					<X>2290</X><Y>1490</Y>
+					<X>690</X><Y>1870</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7512,7 +7571,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 				<Text>
 					<Id>1777701177071</Id>
 					<Name><![CDATA[text11]]></Name>
-					<X>2440</X><Y>1580</Y>
+					<X>840</X><Y>1960</Y>
 					<Label><X>0</X><Y>-10</Y></Label>
 					<PublicFlag>true</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7530,10 +7589,345 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 					</Font>
 					<Alignment>LEFT</Alignment>
 				</Text>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1778110846711</Id>
+					<Name><![CDATA[Btn_Dashboard]]></Name>
+					<X>130</X><Y>1670</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="270" Height="60">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[viewDashboard.navigateTo();]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="28" Style="0"/>
+						<LabelText><![CDATA[Дашбоард]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1778110919114</Id>
+					<Name><![CDATA[Btn_Logic]]></Name>
+					<X>130</X><Y>1750</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="270" Height="60">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[viewLogic1.navigateTo();]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="28" Style="0"/>
+						<LabelText><![CDATA[Логика процесса]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1778110949571</Id>
+					<Name><![CDATA[Btn_3d]]></Name>
+					<X>130</X><Y>1830</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="270" Height="60">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[view3D.navigateTo();]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="28" Style="0"/>
+						<LabelText><![CDATA[3D]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1778114650620</Id>
+					<Name><![CDATA[Btn_Dashboard2]]></Name>
+					<X>100</X><Y>520</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="270" Height="60">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[viewDashboard.navigateTo();]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="28" Style="0"/>
+						<LabelText><![CDATA[Дашбоард]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1778114650622</Id>
+					<Name><![CDATA[Btn_Logic2]]></Name>
+					<X>100</X><Y>600</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="270" Height="60">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[viewLogic1.navigateTo();]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="28" Style="0"/>
+						<LabelText><![CDATA[Логика процесса]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1778114650624</Id>
+					<Name><![CDATA[Btn_3d2]]></Name>
+					<X>100</X><Y>680</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="270" Height="60">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[view3D.navigateTo();]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="28" Style="0"/>
+						<LabelText><![CDATA[3D]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1778114676373</Id>
+					<Name><![CDATA[Btn_Dashboard3]]></Name>
+					<X>130</X><Y>2770</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="270" Height="60">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[viewDashboard.navigateTo();]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="28" Style="0"/>
+						<LabelText><![CDATA[Дашбоард]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1778114676375</Id>
+					<Name><![CDATA[Btn_Logic3]]></Name>
+					<X>130</X><Y>2850</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="270" Height="60">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[viewLogic1.navigateTo();]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="28" Style="0"/>
+						<LabelText><![CDATA[Логика процесса]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1778114676377</Id>
+					<Name><![CDATA[Btn_3d3]]></Name>
+					<X>130</X><Y>2930</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="270" Height="60">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[view3D.navigateTo();]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="28" Style="0"/>
+						<LabelText><![CDATA[3D]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1778115782963</Id>
+					<Name><![CDATA[Btn_next]]></Name>
+					<X>460</X><Y>520</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="160" Height="70">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[viewLogic2.navigateTo();]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="72" Style="0"/>
+						<LabelText><![CDATA[➡]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1778115878089</Id>
+					<Name><![CDATA[Btn_back]]></Name>
+					<X>1720</X><Y>640</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="160" Height="70">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[viewLogic1.navigateTo();]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="72" Style="0"/>
+						<LabelText><![CDATA[⬅]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1778116634829</Id>
+					<Name><![CDATA[Btn_next1]]></Name>
+					<X>1720</X><Y>520</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="160" Height="70">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[viewLogic3.navigateTo();]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="72" Style="0"/>
+						<LabelText><![CDATA[➡]]></LabelText>
+					</ExtendedProperties>
+				</Control>
+				<Control Type="Button">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1778116687943</Id>
+					<Name><![CDATA[Btn_back1]]></Name>
+					<X>2260</X><Y>640</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="160" Height="70">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+						<ActionCode><![CDATA[viewLogic2.navigateTo();]]></ActionCode>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="72" Style="0"/>
+						<LabelText><![CDATA[⬅]]></LabelText>
+					</ExtendedProperties>
+				</Control>
 			</Presentation>
 
 				</Level>
 			</Presentation>
+			<Areas>
+				<Area>
+					<Id>1778110359210</Id>
+					<Name><![CDATA[viewDashboard]]></Name>
+					<X>60</X><Y>1200</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Title><![CDATA[]]></Title>
+					<Width>1920</Width>
+					<Height>1080</Height>
+				</Area>
+				<Area>
+					<Id>1778110672550</Id>
+					<Name><![CDATA[viewLogic1]]></Name>
+					<X>40</X><Y>130</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Title><![CDATA[]]></Title>
+					<Width>1280</Width>
+					<Height>720</Height>
+				</Area>
+				<Area>
+					<Id>1778110724284</Id>
+					<Name><![CDATA[view3D]]></Name>
+					<X>40</X><Y>2400</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Title><![CDATA[]]></Title>
+					<Width>1920</Width>
+					<Height>1080</Height>
+				</Area>
+				<Area>
+					<Id>1778115257229</Id>
+					<Name><![CDATA[viewLogic2]]></Name>
+					<X>830</X><Y>130</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Title><![CDATA[]]></Title>
+					<Width>1280</Width>
+					<Height>720</Height>
+				</Area>
+				<Area>
+					<Id>1778115291830</Id>
+					<Name><![CDATA[viewLogic3]]></Name>
+					<X>2070</X><Y>130</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<Title><![CDATA[]]></Title>
+					<Width>1280</Width>
+					<Height>720</Height>
+				</Area>
+			</Areas>
 
 		</ActiveObjectClass>
 		<!--   =========   Active Object Class   ========  -->
@@ -7725,8 +8119,8 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 	<TimeAccuracy>1.0E-5</TimeAccuracy>
 	<Frame>
 		<Id>1773211376892</Id>
-		<Width>3180</Width>
-		<Height>1080</Height>
+		<Width>1280</Width>
+		<Height>720</Height>
 	</Frame>
 	<Database>
 		<Id>1773211376891</Id>
@@ -7735,7 +8129,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 		<ShutdownCompact>false</ShutdownCompact>
 		<ImportSettings>
 			<ExternalConnection>
-				<Id>1777538504211</Id>
+				<Id>1778166649835</Id>
 				<Name><![CDATA[database]]></Name>
 				<X>0</X><Y>0</Y>
 				<Label><X>10</X><Y>0</Y></Label>
@@ -7748,7 +8142,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 				<DatabaseName><![CDATA[]]></DatabaseName>
 				<ResourceReference>
 					<PackageName><![CDATA[tank_m]]></PackageName>
-					<ClassName><![CDATA[C:/Users/User/Downloads/База Танк-М, трен датасет .xlsx]]></ClassName>
+					<ClassName><![CDATA[База Танк-М, трен датасет .xlsx]]></ClassName>
 				</ResourceReference>
 				<Host><![CDATA[localhost]]></Host>
 				<JdbcDriverClassName><![CDATA[net.sourceforge.jtds.jdbc.Driver]]></JdbcDriverClassName>
@@ -7756,14 +8150,14 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 				<Password><![CDATA[]]></Password>
 			</ExternalConnection>
 			<TableImportSettings>
-				<Id>1777538524111</Id>
+				<Id>1778166652966</Id>
 				<TableReference>
 					<PackageName><![CDATA[tank_m]]></PackageName>
 					<ClassName><![CDATA[лист3]]></ClassName>
 				</TableReference>
 				<ConnectionIndex>0</ConnectionIndex>
 				<ExternalTableName><![CDATA["Лист3"]]></ExternalTableName>
-				<AutoImport>true</AutoImport>
+				<AutoImport>false</AutoImport>
 			</TableImportSettings>
 		</ImportSettings>
 		<ExportSettings>
@@ -7830,9 +8224,38 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 					</Font>
 					<Alignment>LEFT</Alignment>
 				</Text>
+				<Control Type="RadioButtons">
+				 	<EmbeddedIcon>false</EmbeddedIcon>				
+					<Id>1778113703369</Id>
+					<Name><![CDATA[shiftModeRadio]]></Name>
+					<X>50</X><Y>110</Y>
+					<Label><X>0</X><Y>-10</Y></Label>
+					<PublicFlag>true</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<DrawMode>SHAPE_DRAW_2D3D</DrawMode>
+					<BasicProperties Width="270" Height="150">
+                        <EmbeddedIcon>false</EmbeddedIcon>	
+						<TextColor/>
+						<Enabled>true</Enabled>
+					</BasicProperties>
+					<ExtendedProperties>
+						<Font Name="Dialog" Size="28" Style="0"/>
+						<Orientation>VERTICAL</Orientation>
+						<Button><![CDATA[2 смены]]></Button>
+						<Button><![CDATA[3 смены]]></Button>
+						<LinkTo>false</LinkTo>
+					</ExtendedProperties>
+				</Control>
 			</Presentation>
 
 			<Parameters>
+				<Parameter>
+					<ParameterName><![CDATA[isThreeShiftsMode]]></ParameterName>
+					<ParameterValue Class="CodeValue">
+						<Code><![CDATA[shiftModeRadio.getValue() == 1]]></Code>
+					</ParameterValue>
+				</Parameter>
 			</Parameters>
 			<PresentationProperties>
 				<EnableZoomAndPanning>true</EnableZoomAndPanning>
@@ -7849,7 +8272,7 @@ traceln("Смена изменилась на: " + shiftManager.currentShift + "
 				<FinalDate><![CDATA[1806739200000]]></FinalDate>
 				<FinalTime><![CDATA[365.0]]></FinalTime>
 			</ModelTimeProperties>
-			<BypassInitialScreen>true</BypassInitialScreen>
+			<BypassInitialScreen>false</BypassInitialScreen>
 		</SimulationExperiment>	
 	</Experiments>
 	<JavaClasses>
@@ -7950,8 +8373,8 @@ public class FinancialController implements Serializable {
 	</JavaClasses>
 	<ModelResources>
 		<Resource>
-			<Id>1777538524719</Id>
-			<Path><![CDATA[C:/Users/User/Downloads/База Танк-М, трен датасет .xlsx]]></Path>
+			<Id>1778166131946</Id>
+			<Path><![CDATA[База Танк-М, трен датасет .xlsx]]></Path>
 			<ReferencedFromUserCode>false</ReferencedFromUserCode>
 			<Location>FILE_SYSTEM</Location>
 		</Resource>
